@@ -9,7 +9,7 @@ const Footer = () => {
     }}>
       <p>&copy; 2026 Sistema de Gestión de Piscinas. Todos los derechos reservados.</p>
       <p style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.8 }}>
-        Desarrollado con React, Vite y mucho ❤️
+        Desarrollado por Nemo web bootcamp UDD.
       </p>
     </footer>
   );

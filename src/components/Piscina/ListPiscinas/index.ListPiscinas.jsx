@@ -136,24 +136,7 @@ const PiscinaList = () => {
         </div>
       )}
       
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-        <h1>Lista de Piscinas</h1>
-        <button
-          onClick={() => setShowInsomniaModal(true)}
-          style={{
-            backgroundColor: '#6f42c1',
-            color: 'white',
-            border: 'none',
-            padding: '10px 15px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            fontSize: '0.9rem',
-            fontWeight: 'bold'
-          }}
-        >
-          🚀 Agregar con Insomnia
-        </button>
-      </div>
+      
       
       {!isAuthenticated && (
         <div style={{ 

@@ -23,7 +23,7 @@ const PiscinaState = (props) => {
   const getPiscinas = async () => {
     dispatch({ type: 'GET_PISCINAS' });
     try {
-      console.log("🔄 Conectando con MongoDB Atlas para obtener piscinas...");
+      console.log(`🔄 Conectando con backend en: ${import.meta.env.VITE_APP_BASE_API}`);
       const response = await axiosClient.get(API_ENDPOINTS.PISCINAS.GET_ALL);
       
       // Verificar si la respuesta tiene el formato esperado
@@ -45,17 +45,17 @@ const PiscinaState = (props) => {
     } catch (error) {
       logAPIError(error, 'GET /piscinas');
       
-      let errorMessage = '❌ Error al conectar con MongoDB Atlas';
+      let errorMessage = `❌ Error al conectar con el backend (${import.meta.env.VITE_APP_BASE_API})`;
       
       if (error.customMessage) {
         errorMessage = error.customMessage;
       } else if (error.response?.status === 0) {
-        errorMessage = 'No se puede conectar con el servidor MongoDB Atlas';
+        errorMessage = `No se puede conectar con el servidor: ${import.meta.env.VITE_APP_BASE_API}`;
       } else if (error.response?.status >= 500) {
-        errorMessage = 'Error en el servidor MongoDB Atlas';
+        errorMessage = 'Error en el servidor del backend';
       }
       
-      console.log("🔄 Usando datos de ejemplo mientras configuras MongoDB Atlas...");
+      console.log(`🔄 Usando datos de ejemplo. Verifica que el backend esté corriendo en: ${import.meta.env.VITE_APP_BASE_API}`);
       
       // Datos de ejemplo para demostración (mientras configuras MongoDB Atlas)
       const piscinasEjemplo = [
@@ -104,7 +104,7 @@ const PiscinaState = (props) => {
       return data;
     } catch (error) {
       logAPIError(error, `GET /piscinas/${id}`);
-      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al cargar la piscina desde MongoDB Atlas' });
+      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al cargar la piscina desde el backend' });
       return null;
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
@@ -129,7 +129,7 @@ const PiscinaState = (props) => {
       return { success: true, data: nuevaPiscina };
     } catch (error) {
       logAPIError(error, 'POST /piscinas');
-      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al agregar la piscina a MongoDB Atlas' });
+      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al agregar la piscina en el backend' });
       return { success: false, error: error.response?.data?.message || error.customMessage || 'Error desconocido' };
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
@@ -154,7 +154,7 @@ const PiscinaState = (props) => {
       return { success: true, data: piscinaActualizada };
     } catch (error) {
       logAPIError(error, `PUT /piscinas/${id}`);
-      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al actualizar la piscina en MongoDB Atlas' });
+      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al actualizar la piscina en el backend' });
       return { success: false, error: error.response?.data?.message || error.customMessage || 'Error desconocido' };
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
@@ -172,7 +172,7 @@ const PiscinaState = (props) => {
       return { success: true };
     } catch (error) {
       logAPIError(error, `DELETE /piscinas/${id}`);
-      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al eliminar la piscina de MongoDB Atlas' });
+      dispatch({ type: 'SET_ERROR', payload: error.customMessage || 'Error al eliminar la piscina del backend' });
       return { success: false, error: error.response?.data?.message || error.customMessage || 'Error desconocido' };
     } finally {
       dispatch({ type: 'SET_LOADING', payload: false });
